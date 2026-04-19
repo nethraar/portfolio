@@ -149,7 +149,23 @@ const c = contentJson;
   <div class="max-w-6xl mx-auto w-full relative">
     <p class="hero-1 text-xs font-medium tracking-widest uppercase mb-6" style="color:var(--blue-400)">Portfolio · {new Date().getFullYear()}</p>
 
-    <h1 class="hero-2 font-display text-6xl sm:text-8xl font-700 text-white leading-none mb-2" style="font-weight:700; letter-spacing:-0.02em">{c.hero.name}</h1>
+    <div class="hero-2 flex flex-wrap items-start gap-8 mb-2">
+      <h1 class="font-display text-6xl sm:text-8xl font-700 text-white leading-none" style="font-weight:700; letter-spacing:-0.02em">{c.hero.name}</h1>
+      <!-- Finance/consulting animation -->
+      <div class="finance-ticker hidden sm:flex flex-col justify-center" style="padding-top:8px">
+        <div id="ticker-wrap" style="overflow:hidden;height:28px;position:relative">
+          <span class="ticker-item" style="position:absolute;top:0;left:0;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-400);white-space:nowrap">Financial Analysis</span>
+          <span class="ticker-item" style="position:absolute;top:28px;left:0;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-400);white-space:nowrap">Management Consulting</span>
+          <span class="ticker-item" style="position:absolute;top:56px;left:0;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-400);white-space:nowrap">Accounting & Audit</span>
+          <span class="ticker-item" style="position:absolute;top:84px;left:0;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-400);white-space:nowrap">Data Science</span>
+          <span class="ticker-item" style="position:absolute;top:112px;left:0;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-400);white-space:nowrap">Corporate Finance</span>
+        </div>
+        <div style="margin-top:8px;display:flex;gap:6px;align-items:center">
+          <div style="width:24px;height:1px;background:var(--blue-400)"></div>
+          <span id="ticker-dots" style="font-size:0.6rem;color:var(--slate-500);letter-spacing:0.08em">01 / 05</span>
+        </div>
+      </div>
+    </div>
 
     <div class="hero-line w-24 mb-6 mt-4"></div>
 
@@ -174,7 +190,7 @@ const c = contentJson;
 
     <div class="hero-5 flex gap-4">
       <a href="#contact" class="btn-primary">Get in touch</a>
-      <a href="#projects" class="btn-outline">See work</a>
+      <a href="#slides" class="btn-outline">See work</a>
     </div>
   </div>
 
@@ -191,26 +207,26 @@ const c = contentJson;
   @keyframes scrollDrop { 0%{transform:translateY(-100%)} 100%{transform:translateY(200%)} }
 </style>
 
-<!-- Featured (dark navy) -->
-<section id="featured" style="background: var(--navy-800); padding: 96px 0;">
+<!-- Featured (light blue-grey) -->
+<section id="featured" style="background: #E8EEF7; padding: 96px 0; border-top: 1px solid #dde3ed;">
   <div class="max-w-6xl mx-auto px-8">
     <div class="reveal">
-      <p class="text-xs font-medium tracking-widest uppercase mb-1" style="color:var(--blue-400)">Spotlight</p>
-      <h2 class="font-display text-4xl font-semibold text-white" style="letter-spacing:-0.01em">Featured</h2>
-      <div class="section-line"></div>
+      <p class="text-xs font-medium tracking-widest uppercase mb-1" style="color:var(--blue-500)">Spotlight</p>
+      <h2 class="font-display text-4xl font-semibold" style="color:var(--navy-900);letter-spacing:-0.01em">Featured</h2>
+      <div class="section-line" style="background:var(--blue-500)"></div>
     </div>
     {c.featured.length === 0 ? (
-      <p class="reveal" style="color:var(--slate-500); font-style:italic">No featured items yet. Add from admin panel.</p>
+      <p class="reveal" style="color:var(--slate-400); font-style:italic">No featured items yet. Add from admin panel.</p>
     ) : (
       <div class="feat-scroll">
         {c.featured.map((item: any, i: number) => (
-          <div class={`card-dark reveal reveal-delay-${Math.min(i+1,4)}`} style="min-width:280px; flex-shrink:0; overflow:hidden">
+          <div class={`card-light reveal reveal-delay-${Math.min(i+1,4)}`} style="min-width:280px; flex-shrink:0; overflow:hidden">
             {item.thumbnail && <img src={`/uploads/${item.thumbnail}`} alt={item.title} style="width:100%;height:160px;object-fit:cover;display:block" />}
             <div style="padding:24px">
-              <p style="font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-400);margin-bottom:8px">{item.type}</p>
-              <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:8px;font-weight:600">{item.title}</h3>
-              <p style="font-size:0.8125rem;color:var(--slate-400);line-height:1.6;margin-bottom:16px">{item.description}</p>
-              {item.link && <a href={item.link} target="_blank" style="font-size:0.75rem;color:var(--blue-400);text-transform:uppercase;letter-spacing:0.06em;font-weight:500">View →</a>}
+              <p style="font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-500);margin-bottom:8px">{item.type}</p>
+              <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy-900);margin-bottom:8px;font-weight:600">{item.title}</h3>
+              <p style="font-size:0.8125rem;color:var(--slate-500);line-height:1.6;margin-bottom:16px">{item.description}</p>
+              {item.link && <a href={item.link} target="_blank" style="font-size:0.75rem;color:var(--blue-500);text-transform:uppercase;letter-spacing:0.06em;font-weight:500">View →</a>}
             </div>
           </div>
         ))}
@@ -358,6 +374,26 @@ const c = contentJson;
 </div><!-- end light -->
 
 <script>
+  // Finance ticker animation
+  const items = document.querySelectorAll('.ticker-item') as NodeListOf<HTMLElement>;
+  const dots = document.getElementById('ticker-dots');
+  let current = 0;
+  const total = items.length;
+
+  function tick() {
+    const next = (current + 1) % total;
+    items[current].style.transition = 'top 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease';
+    items[next].style.transition = 'top 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease';
+    items[current].style.top = '-28px';
+    items[next].style.top = '0';
+    current = next;
+    if (dots) dots.textContent = `0${current + 1} / 0${total}`;
+  }
+
+  // Init positions
+  items.forEach((el, i) => { el.style.top = `${i * 28}px`; });
+  setInterval(tick, 2200);
+
   // Intersection Observer for .reveal elements
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
