@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  site: 'https://nethraar.github.io',
+  site: 'https://nethrashriramesh.vercel.app',
   output: 'server',
   adapter: vercel(),
   vite: {
