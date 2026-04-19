@@ -34,10 +34,6 @@ const content = file ? JSON.parse(file.content) : null;
       <h2 class="font-semibold text-white mb-1">Excel Sheets</h2>
       <p class="text-zinc-400 text-sm">{content?.sheets?.length ?? 0} sheets · Upload XLSX</p>
     </a>
-    <a href="/admin/edit/apps" class="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl p-6 transition block">
-      <h2 class="font-semibold text-white mb-1">Live Apps</h2>
-      <p class="text-zinc-400 text-sm">{content?.apps?.length ?? 0} apps</p>
-    </a>
   </div>
 
   <div class="mt-10 p-4 bg-zinc-800/50 border border-zinc-700 rounded-lg text-sm text-zinc-400">

@@ -7,7 +7,7 @@ const session = getSession(Astro.request);
 if (!session) return Astro.redirect('/admin?error=1');
 
 const { section } = Astro.params;
-const allowed = ['hero', 'featured', 'projects', 'slides', 'sheets', 'apps'];
+const allowed = ['hero', 'featured', 'projects', 'slides', 'sheets'];
 if (!allowed.includes(section!)) return Astro.redirect('/admin/dashboard');
 
 const file = await getFileContent('src/data/content.json');
