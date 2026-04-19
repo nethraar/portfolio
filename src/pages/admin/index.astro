@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getSession } from '../../lib/auth';
+
+const session = getSession(Astro.request);
+if (session) return Astro.redirect('/admin/dashboard');
+
+const error = Astro.url.searchParams.get('error');
+---
+<Layout title="Admin Login">
+  <div class="min-h-screen flex items-center justify-center px-4">
+    <div class="w-full max-w-sm">
+      <div class="text-center mb-8">
+        <h1 class="text-2xl font-bold text-white">Admin Login</h1>
+        <p class="text-zinc-500 text-sm mt-1">Portfolio management</p>
+      </div>
+      {error && (
+        <div class="bg-red-900/30 border border-red-700 text-red-300 text-sm px-4 py-3 rounded-lg mb-6">
+          Invalid email or password.
+        </div>
+      )}
+      <form method="POST" action="/api/auth/login" class="space-y-4">
+        <div>
+          <label class="block text-sm text-zinc-400 mb-1">Email</label>
+          <input
+            type="email"
+            name="email"
+            required
+            class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500"
+          />
+        </div>
+        <div>
+          <label class="block text-sm text-zinc-400 mb-1">Password</label>
+          <input
+            type="password"
+            name="password"
+            required
+            class="w-full bg-zinc-900 border border-zinc-700 text-white rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded-lg text-sm transition"
+        >
+          Sign in
+        </button>
+      </form>
+    </div>
+  </div>
+</Layout>

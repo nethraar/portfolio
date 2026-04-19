@@ -1,0 +1,24 @@
+{
+  "hero": {
+    "name": "Nethra Shriramesh",
+    "tagline": "Aspiring Accounting & Finance Professional",
+    "subtagline": "Data Science skills. Consulting mindset. Building at the intersection of numbers and insight.",
+    "email": "nethrashri.ramesh@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/nethrashri-ramesh",
+    "github": "https://github.com/nethraar"
+  },
+  "featured": [],
+  "projects": [
+    {
+      "id": "pixelmuse",
+      "title": "PixelMuse Present",
+      "description": "AI literacy trainer for students. Built at NOBE Hackathon 2025.",
+      "repo": "https://github.com/nethraar/PixelMuse-Present--NOBE-Hackathon-25",
+      "demo": "",
+      "tags": ["AI", "Education", "Hackathon"]
+    }
+  ],
+  "slides": [],
+  "sheets": [],
+  "apps": []
+}
