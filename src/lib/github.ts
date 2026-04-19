@@ -2,7 +2,7 @@ const REPO = 'nethraar/portfolio';
 const BRANCH = 'main';
 
 async function githubFetch(path: string, options: RequestInit = {}) {
-  const token = import.meta.env.GITHUB_TOKEN;
+  const token = process.env.GITHUB_TOKEN;
   return fetch(`https://api.github.com/repos/${REPO}/${path}`, {
     ...options,
     headers: {

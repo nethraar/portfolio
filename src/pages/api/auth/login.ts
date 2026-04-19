@@ -6,8 +6,8 @@ export const POST: APIRoute = async ({ request }) => {
   const email = form.get('email')?.toString().trim() ?? '';
   const password = form.get('password')?.toString() ?? '';
 
-  const validEmail = import.meta.env.ADMIN_EMAIL;
-  const validPassword = import.meta.env.ADMIN_PASSWORD;
+  const validEmail = process.env.ADMIN_EMAIL;
+  const validPassword = process.env.ADMIN_PASSWORD;
 
   if (email !== validEmail || password !== validPassword) {
     return new Response(null, {

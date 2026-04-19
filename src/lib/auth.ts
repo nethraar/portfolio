@@ -1,5 +1,5 @@
 const SESSION_COOKIE = 'portfolio_session';
-const SESSION_SECRET = import.meta.env.SESSION_SECRET || 'dev-secret-change-in-prod';
+const SESSION_SECRET = process.env.SESSION_SECRET || 'dev-secret-change-in-prod';
 
 export function createSessionToken(email: string): string {
   const payload = { email, exp: Date.now() + 1000 * 60 * 60 * 8 };
