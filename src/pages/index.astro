@@ -62,11 +62,14 @@ const c = contentJson;
       ) : (
         <div class="flex gap-6 overflow-x-auto pb-2">
           {c.featured.map((item: any) => (
-            <div class="card rounded-xl p-6 min-w-72 flex-shrink-0 hover:border-purple-600 transition">
-              <p class="text-xs uppercase tracking-widest mb-2" style="color: #8b7cb0">{item.type}</p>
-              <h3 class="text-lg font-semibold text-white mb-2">{item.title}</h3>
-              <p class="text-sm mb-4" style="color: #7a6b9a">{item.description}</p>
-              {item.link && <a href={item.link} target="_blank" style="color: var(--purple-light)" class="text-sm hover:text-white">View →</a>}
+            <div class="card rounded-xl overflow-hidden min-w-72 flex-shrink-0 hover:border-purple-600 transition">
+              {item.thumbnail && <img src={`/uploads/${item.thumbnail}`} alt={item.title} class="w-full h-40 object-cover" />}
+              <div class="p-6">
+                <p class="text-xs uppercase tracking-widest mb-2" style="color: #8b7cb0">{item.type}</p>
+                <h3 class="text-lg font-semibold text-white mb-2">{item.title}</h3>
+                <p class="text-sm mb-4" style="color: #7a6b9a">{item.description}</p>
+                {item.link && <a href={item.link} target="_blank" style="color: var(--purple-light)" class="text-sm hover:text-white">View →</a>}
+              </div>
             </div>
           ))}
         </div>
@@ -136,7 +139,9 @@ const c = contentJson;
     <p class="mb-10 text-sm" style="color: #4a7a5e">GitHub repositories</p>
     <div class="grid gap-6 sm:grid-cols-2">
       {c.projects.map((p: any) => (
-        <div class="card rounded-xl p-6 transition" style="transition: border-color 0.2s">
+        <div class="card rounded-xl overflow-hidden transition" style="transition: border-color 0.2s">
+          {p.thumbnail && <img src={`/uploads/${p.thumbnail}`} alt={p.title} class="w-full h-40 object-cover" />}
+          <div class="p-6">
           <h3 class="text-lg font-semibold text-white mb-2">{p.title}</h3>
           <p class="text-sm mb-4" style="color: #7a6b9a">{p.description}</p>
           <div class="flex gap-2 flex-wrap mb-4">
@@ -147,6 +152,7 @@ const c = contentJson;
           <div class="flex gap-4">
             {p.repo && <a href={p.repo} target="_blank" style="color: #9b8ab8" class="text-sm hover:text-white transition">GitHub →</a>}
             {p.demo && <a href={p.demo} target="_blank" style="color: #b8e8c8" class="text-sm hover:text-white transition">Live demo →</a>}
+          </div>
           </div>
         </div>
       ))}
@@ -163,10 +169,13 @@ const c = contentJson;
       ) : (
         <div class="grid gap-6 sm:grid-cols-2">
           {c.apps.map((a: any) => (
-            <div class="card rounded-xl p-6 transition">
-              <h3 class="text-lg font-semibold text-white mb-2">{a.title}</h3>
-              <p class="text-sm mb-4" style="color: #7a6b9a">{a.description}</p>
-              <a href={a.url} target="_blank" class="btn-primary px-4 py-2 text-white text-sm rounded-lg transition inline-block">Open app →</a>
+            <div class="card rounded-xl overflow-hidden transition">
+              {a.thumbnail && <img src={`/uploads/${a.thumbnail}`} alt={a.title} class="w-full h-40 object-cover" />}
+              <div class="p-6">
+                <h3 class="text-lg font-semibold text-white mb-2">{a.title}</h3>
+                <p class="text-sm mb-4" style="color: #7a6b9a">{a.description}</p>
+                <a href={a.url} target="_blank" class="btn-primary px-4 py-2 text-white text-sm rounded-lg transition inline-block">Open app →</a>
+              </div>
             </div>
           ))}
         </div>
