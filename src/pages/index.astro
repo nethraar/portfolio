@@ -125,6 +125,15 @@ const c = contentJson;
   .hero-3 { animation: fadeUp 0.8s ease 0.5s both; }
   .hero-4 { animation: fadeUp 0.8s ease 0.7s both; }
   .hero-5 { animation: fadeUp 0.8s ease 0.9s both; }
+
+  /* Finance widget */
+  .fin-bar { height: 0%; transition: none; }
+  @keyframes barGrow { from { height: 0 } to { height: var(--h) } }
+  .fin-bar { height: var(--h); transform-origin: bottom; }
+  @keyframes drawLine { to { stroke-dashoffset: 0; } }
+  @keyframes iconPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+  .fin-widget { position: relative; }
+  .fin-widget svg.trend { position: absolute; top: 0; left: 0; }
 </style>
 
 <!-- Nav -->
@@ -149,20 +158,51 @@ const c = contentJson;
   <div class="max-w-6xl mx-auto w-full relative">
     <p class="hero-1 text-xs font-medium tracking-widest uppercase mb-6" style="color:var(--blue-400)">Portfolio · {new Date().getFullYear()}</p>
 
-    <div class="hero-2 flex flex-wrap items-start gap-8 mb-2">
+    <div class="hero-2 flex flex-wrap items-center gap-12 mb-2">
       <h1 class="font-display text-6xl sm:text-8xl font-700 text-white leading-none" style="font-weight:700; letter-spacing:-0.02em">{c.hero.name}</h1>
-      <!-- Finance/consulting animation -->
-      <div class="finance-ticker hidden sm:flex flex-col justify-center" style="padding-top:8px">
-        <div id="ticker-wrap" style="overflow:hidden;height:28px;position:relative">
-          <span class="ticker-item" style="position:absolute;top:0;left:0;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-400);white-space:nowrap">Financial Analysis</span>
-          <span class="ticker-item" style="position:absolute;top:28px;left:0;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-400);white-space:nowrap">Management Consulting</span>
-          <span class="ticker-item" style="position:absolute;top:56px;left:0;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-400);white-space:nowrap">Accounting & Audit</span>
-          <span class="ticker-item" style="position:absolute;top:84px;left:0;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-400);white-space:nowrap">Data Science</span>
-          <span class="ticker-item" style="position:absolute;top:112px;left:0;font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-400);white-space:nowrap">Corporate Finance</span>
+
+      <!-- Finance visual widget -->
+      <div class="fin-widget hidden sm:block" style="border:1px solid rgba(4,102,200,0.25);padding:20px 24px;background:rgba(4,102,200,0.06);min-width:220px">
+        <!-- Animated bar chart -->
+        <div style="display:flex;align-items:flex-end;gap:6px;height:52px;margin-bottom:14px">
+          <div class="fin-bar" style="width:18px;background:var(--blue-500);animation:barGrow 1.2s ease 0.2s both;--h:55%"></div>
+          <div class="fin-bar" style="width:18px;background:var(--blue-500);animation:barGrow 1.2s ease 0.4s both;--h:80%"></div>
+          <div class="fin-bar" style="width:18px;background:var(--blue-500);animation:barGrow 1.2s ease 0.6s both;--h:45%"></div>
+          <div class="fin-bar" style="width:18px;background:var(--blue-400);animation:barGrow 1.2s ease 0.8s both;--h:90%"></div>
+          <div class="fin-bar" style="width:18px;background:var(--blue-400);animation:barGrow 1.2s ease 1.0s both;--h:70%"></div>
+          <div class="fin-bar" style="width:18px;background:var(--blue-400);animation:barGrow 1.2s ease 1.2s both;--h:100%"></div>
+          <!-- Trend line SVG overlay -->
+          <svg style="position:absolute;pointer-events:none" width="140" height="52" viewBox="0 0 140 52">
+            <polyline class="trend-line" points="9,34 35,20 61,38 87,10 113,24 139,4" fill="none" stroke="#0466C8" stroke-width="1.5" stroke-dasharray="200" stroke-dashoffset="200" style="animation:drawLine 1.8s ease 0.5s forwards"/>
+          </svg>
         </div>
-        <div style="margin-top:8px;display:flex;gap:6px;align-items:center">
-          <div style="width:24px;height:1px;background:var(--blue-400)"></div>
-          <span id="ticker-dots" style="font-size:0.6rem;color:var(--slate-500);letter-spacing:0.08em">01 / 05</span>
+
+        <!-- Metric rows -->
+        <div style="border-top:1px solid rgba(4,102,200,0.2);padding-top:12px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate-400)">Revenue</span>
+            <span class="count-up" data-target="2.4" data-suffix="M" style="font-size:0.75rem;font-weight:600;color:var(--blue-400);font-family:'Playfair Display',serif">$0M</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate-400)">Growth</span>
+            <span class="count-up" data-target="18" data-suffix="%" style="font-size:0.75rem;font-weight:600;color:#22c55e;font-family:'Playfair Display',serif">0%</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--slate-400)">ROI</span>
+            <span class="count-up" data-target="34" data-suffix="%" style="font-size:0.75rem;font-weight:600;color:var(--blue-400);font-family:'Playfair Display',serif">0%</span>
+          </div>
+        </div>
+
+        <!-- Icon row -->
+        <div style="display:flex;gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(4,102,200,0.2)">
+          <!-- Calculator icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(4,102,200,0.6)" stroke-width="1.5" style="animation:iconPulse 3s ease 1s infinite"><rect x="4" y="2" width="16" height="20" rx="0"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="8" y2="12" stroke-width="2.5"/><line x1="12" y1="12" x2="12" y2="12" stroke-width="2.5"/><line x1="16" y1="12" x2="16" y2="12" stroke-width="2.5"/><line x1="8" y1="16" x2="8" y2="16" stroke-width="2.5"/><line x1="12" y1="16" x2="12" y2="16" stroke-width="2.5"/><line x1="16" y1="16" x2="16" y2="16" stroke-width="2.5"/></svg>
+          <!-- Chart icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(4,102,200,0.6)" stroke-width="1.5" style="animation:iconPulse 3s ease 1.5s infinite"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <!-- Dollar icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(4,102,200,0.6)" stroke-width="1.5" style="animation:iconPulse 3s ease 2s infinite"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <!-- Briefcase icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(4,102,200,0.6)" stroke-width="1.5" style="animation:iconPulse 3s ease 2.5s infinite"><rect x="2" y="7" width="20" height="14" rx="0"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
         </div>
       </div>
     </div>
@@ -374,25 +414,28 @@ const c = contentJson;
 </div><!-- end light -->
 
 <script>
-  // Finance ticker animation
-  const items = document.querySelectorAll('.ticker-item') as NodeListOf<HTMLElement>;
-  const dots = document.getElementById('ticker-dots');
-  let current = 0;
-  const total = items.length;
-
-  function tick() {
-    const next = (current + 1) % total;
-    items[current].style.transition = 'top 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease';
-    items[next].style.transition = 'top 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease';
-    items[current].style.top = '-28px';
-    items[next].style.top = '0';
-    current = next;
-    if (dots) dots.textContent = `0${current + 1} / 0${total}`;
+  // Count-up animation for finance widget metrics
+  function animateCount(el: HTMLElement) {
+    const target = parseFloat(el.dataset.target ?? '0');
+    const suffix = el.dataset.suffix ?? '';
+    const isDecimal = target % 1 !== 0;
+    const duration = 1800;
+    const start = performance.now();
+    function step(now: number) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = eased * target;
+      el.textContent = (suffix === 'M' ? '$' : '') + (isDecimal ? val.toFixed(1) : Math.floor(val).toString()) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
   }
 
-  // Init positions
-  items.forEach((el, i) => { el.style.top = `${i * 28}px`; });
-  setInterval(tick, 2200);
+  const countEls = document.querySelectorAll<HTMLElement>('.count-up');
+  const countObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target as HTMLElement); countObserver.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  countEls.forEach(el => countObserver.observe(el));
 
   // Intersection Observer for .reveal elements
   const observer = new IntersectionObserver((entries) => {
